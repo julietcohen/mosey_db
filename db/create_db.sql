@@ -125,7 +125,7 @@ create index idx_event_individual_id on event (individual_id);
 --TODO: I probably don't use the index below
 -- maybe just have an index for event_id, to speed up joins
 create index idx_event_full on event (event_id,individual_id,study_id,timestamp);
-create index idx_event_studyid on event (study_id)
+create index idx_event_studyid on event (study_id);
 
 --individual table
 --TODO: I probably don't use both individual_id and study_id together

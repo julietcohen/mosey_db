@@ -1,6 +1,10 @@
-wd=~/projects/mycoolproject/analysis
-out=~/projects/mycoolproject/analysis/data
-src=~/projects/movebankdb/src
+# wd=~/projects/mycoolproject/analysis
+# out=~/projects/mycoolproject/analysis/data
+# src=~/projects/movebankdb/src
+
+wd=~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output
+out=~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/data
+src=~/Documents/OliverLab/covid_paper/repositories/mosey_db
 
 cd $wd
 
@@ -10,5 +14,5 @@ cd $wd
 # 2) In the main working directory, $wd, set up auth.yml with your authentication information.
 # See the file src/examples/study.csv
 
-$src/db/load_datasets.sh $src $out
+$src/db/load_studies.sh $src $out
   

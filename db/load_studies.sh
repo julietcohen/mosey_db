@@ -1,10 +1,9 @@
-#
 # Usage: load_studiessh #syntax to run without any parameters
 
 
 
 eval "$(docopts -h - : "$@" <<EOF
-Usage: load_datasets.sh [options] ...
+Usage: load_studies.sh [options] ...
 
 Options:
       --help     Show help options.
