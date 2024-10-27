@@ -46,7 +46,7 @@ done
 [[ -z "$process" ]] && process="dciv"
 
 # Load datasets
-studyIds=($(mlr --csv --opprint filter '$run == 1' then cut -f study_id ctfs/study.csv | tail -n +2))
+studyIds=($(mlr --csv --opprint filter '$run == 1' then cut -f study_id ~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/ctfs/study.csv | tail -n +2))
 
 echo "Loading ${#studyIds[@]} studies."
 
