@@ -2,9 +2,10 @@
 # out=~/projects/mycoolproject/analysis/data
 # src=~/projects/movebankdb/src
 
-wd=~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output
+#wd=~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output
 out=~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/raw_clean_csv_dirs
 src=~/Documents/OliverLab/covid_paper/repositories/mosey_db
+db=~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/data/mosey.db
 
 cd $wd
 
@@ -15,5 +16,5 @@ cd $wd
 # See the file src/examples/study.csv
 
 # run the script and pass "out"" as the "csvdir" arg, and "src" as the "db" arg
-$src/db/load_studies_wo_docopts.sh --db=$src --csvdir=$out
+$src/db/load_studies.sh --db=$db --csvdir=$out
   

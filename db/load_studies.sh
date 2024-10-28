@@ -47,7 +47,7 @@ EOF
 
 # Use miller to filter by run column and then take the study_id field
 # need to use tail to remove first line, which is the header
-studyIds=($(mlr --csv --opprint filter '$run == 1' then cut -f study_id ctfs/study.csv | tail -n +2))
+studyIds=($(mlr --csv --opprint filter '$run == 1' then cut -f study_id ~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/ctfs/study.csv | tail -n +2))
 
 echo Loading ${#studyIds[@]} studies.
 

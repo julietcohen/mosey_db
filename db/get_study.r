@@ -69,7 +69,7 @@ if(interactive()) {
 set.seed(.seed)
 t0 <- Sys.time()
 
-source(rd('src/startup.r'))
+source(rd('~/Documents/OliverLab/covid_paper/repositories/mosey_db/startup.r'))
 
 suppressPackageStartupMessages({
   library(getPass)
