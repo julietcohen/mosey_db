@@ -31,7 +31,7 @@ isAbsolute <- function(path) {
 if(interactive()) {
   library(here)
   
-  .wd <- '~/projects/mosey_db_test/analysis/error_dup_tag_id'
+  .wd <- '~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output'
   .seed <- NULL
   .test <- TRUE
   rd <- here
@@ -47,7 +47,8 @@ if(interactive()) {
   })
   
   ag <- docopt(doc, version = '0.1\n')
-  .wd <- getwd()
+  # .wd <- getwd()
+  .wd <- '~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output'
   .script <-  thisfile()
   .seed <- ag$seed
   .test <- as.logical(ag$test)
@@ -74,7 +75,8 @@ source(rd('~/Documents/OliverLab/covid_paper/repositories/mosey_db/startup.r'))
 suppressPackageStartupMessages({
   library(getPass)
   library(keyring)
-  library(rmoveapi)
+  #library(rmoveapi)
+  library(move)
   library(tictoc)
   library(yaml)
 })
