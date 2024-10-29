@@ -44,12 +44,13 @@ if(interactive()) {
   suppressPackageStartupMessages({
     library(docopt)
     library(rprojroot)
+    library(whereami)
   })
   
   ag <- docopt(doc, version = '0.1\n')
   # .wd <- getwd()
   .wd <- '~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output'
-  .script <-  thisfile()
+  .script <-  whereami::thisfile()
   .seed <- ag$seed
   .test <- as.logical(ag$test)
   rd <- is_rstudio_project$make_fix_file(.script)
@@ -75,10 +76,11 @@ source(rd('~/Documents/OliverLab/covid_paper/repositories/mosey_db/startup.r'))
 suppressPackageStartupMessages({
   library(getPass)
   library(keyring)
-  #library(rmoveapi)
+  library(rmoveapi)
   library(move)
   library(tictoc)
   library(yaml)
+  library(move2)
 })
 
 #Source all files in the auto load funs directory
@@ -100,9 +102,12 @@ if(is.null(.auth) || grepl('.*\\.yml$',.auth)) {
   }
   cred <- read_yaml(yamlPF)
   setAuth(cred$user,cred$pass)
+  # movebank_store_credentials(cred$user, cred$pass)
 } else if(.auth=='keyring') {
+  # movebank_store_credentials(key_get('movebank_user'), key_get('movebank_pass'))
   setAuth(key_get('movebank_user'),key_get('movebank_pass'))
 } else if(.auth=='input') {
+  # movebank_store_credentials(getPass('Movebank user:'), getPass('Movebank password:'))
   setAuth(getPass('Movebank user:'),getPass('Movebank password:'))
 } else {
   stop('Invalid authentication method')
@@ -124,7 +129,7 @@ dfs <- list() #Holds references to entity dataframes
 
 #---- Load data ----#
 
-fields <- read_csv(rd('src/fields.csv'))
+fields <- read_csv(rd('~/Documents/OliverLab/covid_paper/repositories/mosey_db/fields.csv'))
 
 message(glue('Downloading data for study {.studyid} from movebank'))
 
@@ -133,9 +138,14 @@ message(glue('Downloading data for study {.studyid} from movebank'))
 #---------------#
 message('Getting study data')
 
-attributes <- fields %>% filter(table=='study' & !is.na(name_raw)) %>% pull('name_raw')
+attributes <- fields %>% 
+              filter(table=='study' & !is.na(name_raw)) %>% 
+              pull('name_raw')
 
+# rmoveapi is a custom package by ben, maybe use move2::movebank_download_study
 dfs$study <- getStudy(.studyid,params=list(attributes=attributes))
+# dfs$study <-movebank_download_study(.studyid, attributes = "all")
+
 
 message(glue('Study name is: {dfs$study$name}'))
 message(glue('Reported num individuals: {dfs$study$number_of_individuals}, num events: {format(dfs$study$number_of_deployed_locations,big.mark=",")}'))
@@ -217,8 +227,12 @@ as_tibble(rcount) %>% gather(key='entity',value='num') %>%
 message(glue('Saving data to csv files in {.rawP}'))
 
 #Write other entities to disk. Event data was saved directly to disk so don't write that.
-csvPF %>% 
-  list_modify('event'=NULL) %>% 
-  iwalk(~write_csv(dfs[.y][[1]],.x,na=""))
+csvPF %>%
+  list_modify('event'=NULL) %>%
+  iwalk(~{
+    if (!is.null(dfs[[.y]]) && is.data.frame(dfs[[.y]])) {
+      write_csv(dfs[[.y]], .x, na="")
+    }
+  })
 
-message(glue('Script complete in {diffmin(t0)} minutes'))
+message(glue('Script complete'))
