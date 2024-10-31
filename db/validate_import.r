@@ -70,7 +70,7 @@ if(interactive()) {
 set.seed(.seed)
 t0 <- Sys.time()
 
-source(rd('src/startup.r'))
+source(file.path(.wd, '/startup.r'))
 
 suppressWarnings(
   suppressPackageStartupMessages({
@@ -80,7 +80,7 @@ suppressWarnings(
   }))
 
 #Source all files in the auto load funs directory
-list.files(rd('src/funs/auto'),full.names=TRUE) %>%
+list.files(file.path(.wd, '/funs/auto'),full.names=TRUE) %>%
   walk(source)
 
 #---- Local parameters ----#

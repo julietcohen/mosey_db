@@ -11,6 +11,7 @@ Options:
       --csvdir=<csvdir> Path to store raw and clean csv directories
       --db=<db>  Path to database. Default is data/mosey.db
       --process=<process> Character string specifying which steps to process. Defaults to dciv. (download, clean, import, validate)
+      --src=<src> Path to the mosey_db repository for consistency.
 ----
 load_datasets 0.1
 

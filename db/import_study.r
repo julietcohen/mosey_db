@@ -46,7 +46,7 @@ if(interactive()) {
   
   ag <- docopt(doc, version = '0.1\n')
   .wd <- getwd()
-  .script <-  thisfile()
+  .script <-  whereami::thisfile()
   .seed <- ag$seed
   .test <- as.logical(ag$test)
   .rollback <- as.logical(ag$rollback)
@@ -75,7 +75,9 @@ if(interactive()) {
 set.seed(5326)
 t0 <- Sys.time()
 
-source(rd('src/startup.r'))
+source(list.files(pattern = "startup.r", 
+                  recursive = TRUE, 
+                  full.names = TRUE))
 
 suppressWarnings(
   suppressPackageStartupMessages({
@@ -86,7 +88,7 @@ suppressWarnings(
 }))
 
 #Source all files in the auto load funs directory
-list.files(rd('src/funs/auto'),full.names=TRUE) %>%
+list.files(rd('funs/auto'),full.names=TRUE) %>%
   walk(source)
 
 #---- Local parameters ----#
@@ -96,7 +98,7 @@ invisible(assert_that(file.exists(.dbPF)))
 db <- DBI::dbConnect(RSQLite::SQLite(), .dbPF)
 invisible(assert_that(length(dbListTables(db))>0))
 
-fields <- read_csv(rd('src/fields.csv'),col_types=cols())
+fields <- read_csv(file.path(.wd, 'fields.csv'),col_types=cols())
 
 #---- Functions ----#
 
