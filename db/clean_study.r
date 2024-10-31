@@ -51,9 +51,7 @@ if(interactive()) {
   rd <- is_rstudio_project$make_fix_file(.script)
   .studyid <- as.integer(ag$studyid)
     
-  source(list.files(pattern = 'funs/input_parse.r', 
-                    recursive = TRUE, 
-                    full.names = TRUE))
+  source(rd('funs/input_parse.r'))
   
   if(length(ag$raw)==0) {
     .rawP <- file.path(.wd,'data',.studyid,'raw')
@@ -74,9 +72,7 @@ if(interactive()) {
 set.seed(.seed)
 t0 <- Sys.time()
 
-source(list.files(pattern = 'startup.r', 
-                  recursive = TRUE, 
-                  full.names = TRUE))
+source(rd('startup.r'))
 
 suppressWarnings(
   suppressPackageStartupMessages({
@@ -84,12 +80,10 @@ suppressWarnings(
 }))
 
 #Source all files in the auto load funs directory
-list.files('/funs/auto',full.names=TRUE, recursive=TRUE) %>%
+list.files(rd('funs/auto'),full.names=TRUE) %>%
   walk(source)
 
-source(list.files(pattern = 'funs/mbts.r', 
-                  recursive = TRUE, 
-                  full.names = TRUE))
+source(rd('funs/mbts.r'))
 
 #This sets the movebank output format for timestamps for write_csv
 output_column.POSIXct <- mbts
@@ -115,14 +109,10 @@ invisible(assert_that(length(norecs)==0,
 message(glue('Cleaning data for study {.studyid}'))
 message(glue('Loading raw data from {.rawP}'))
 #---- Load data ----#
-sensTypes <- read_csv(list.files(pattern = 'sensor_type.csv', 
-                                 recursive = TRUE, 
-                                 full.names = TRUE)) %>% #lookup table for tag types
+sensTypes <- read_csv(rd('sensor_type.csv')) %>% #lookup table for tag types
              rename(sensor_type_id=id)
 
-fields <- read_csv(list.files(pattern = 'fields.csv', 
-                              recursive = TRUE, 
-                              full.names = TRUE))
+fields <- read_csv('/Users/juliet/Documents/OliverLab/covid_paper/repositories/mosey_db/fields.csv')
 
 #---------------#
 #---- study ----#

@@ -75,9 +75,7 @@ if(interactive()) {
 set.seed(5326)
 t0 <- Sys.time()
 
-source(list.files(pattern = "startup.r", 
-                  recursive = TRUE, 
-                  full.names = TRUE))
+source(rd('startup.r'))
 
 suppressWarnings(
   suppressPackageStartupMessages({
@@ -85,6 +83,7 @@ suppressWarnings(
     library(knitr)
     library(lubridate)
     library(RSQLite)
+    library(here)
 }))
 
 #Source all files in the auto load funs directory
@@ -98,7 +97,7 @@ invisible(assert_that(file.exists(.dbPF)))
 db <- DBI::dbConnect(RSQLite::SQLite(), .dbPF)
 invisible(assert_that(length(dbListTables(db))>0))
 
-fields <- read_csv(file.path(.wd, 'fields.csv'),col_types=cols())
+fields <- read_csv('/Users/juliet/Documents/OliverLab/covid_paper/repositories/mosey_db/fields.csv',col_types=cols())
 
 #---- Functions ----#
 

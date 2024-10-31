@@ -42,7 +42,7 @@ if(interactive()) {
   
   ag <- docopt(doc, version = '0.1\n')
   .wd <- getwd()
-  .script <-  thisfile()
+  .script <-  whereami::thisfile()
   .seed <- ag$seed
   .test <- as.logical(ag$test)
   .eda <- as.logical(ag$eda)
@@ -70,7 +70,7 @@ if(interactive()) {
 set.seed(.seed)
 t0 <- Sys.time()
 
-source(file.path(.wd, '/startup.r'))
+source('/Users/juliet/Documents/OliverLab/covid_paper/repositories/mosey_db/startup.r')
 
 suppressWarnings(
   suppressPackageStartupMessages({

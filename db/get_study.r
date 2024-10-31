@@ -84,7 +84,7 @@ suppressPackageStartupMessages({
 })
 
 #Source all files in the auto load funs directory
-list.files(rd('src/funs/auto'),full.names=TRUE) %>%
+list.files(rd('funs/auto'),full.names=TRUE) %>%
   walk(source)
 
 #This sets the movebank output format for timestamps for write_csv
@@ -129,7 +129,7 @@ dfs <- list() #Holds references to entity dataframes
 
 #---- Load data ----#
 
-fields <- read_csv(rd('~/Documents/OliverLab/covid_paper/repositories/mosey_db/fields.csv'))
+fields <- read_csv('/Users/juliet/Documents/OliverLab/covid_paper/repositories/mosey_db/fields.csv')
 
 message(glue('Downloading data for study {.studyid} from movebank'))
 
