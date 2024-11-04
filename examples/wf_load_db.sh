@@ -17,4 +17,4 @@ cd $wd
 
 # run the script and pass "out"" as the "csvdir" arg, and "src" as the "db" arg
 $src/db/load_studies.sh --db=$db --csvdir=$out --src=$src
-  
+

@@ -74,7 +74,7 @@ do
   
   if [[ "$process" = *d* ]]; then
     echo "Downloading study ${studyId}"
-    $MOSEYDB_SRC/db/get_study.r $studyId -r $raw -t 2>&1 | tee logs/$studyId.log
+    $MOSEYDB_SRC/db/get_study.r ${studyId} -r $raw -t 2>&1 | tee logs/$studyId.log
     exitcode=("${PIPESTATUS[@]}")
 
     #See here for info on how to store: https://www.mydbaworld.com/retrieve-return-code-all-commands-pipeline-pipestatus/
@@ -95,7 +95,7 @@ do
   #---------------#
   if [[ "$process" = *c* ]]; then
     echo "Cleaning study ${studyId}"
-    $MOSEYDB_SRC/db/clean_study.r ${studyId} -c $clean -r $raw -t 2>&1 | tee -a logs/$studyId.log
+    $MOSEYDB_SRC/db/clean_study.r $studyId -c $clean -r $raw -t 2>&1 | tee -a logs/$studyId.log
     exitcode=("${PIPESTATUS[@]}")
   
     if [ ${exitcode[0]} -eq 0 ]; then

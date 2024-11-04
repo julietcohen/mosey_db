@@ -7,21 +7,18 @@
 #       I'll just need to replace all \r\n with "" because direct save does not do this.
 #TODO: print out the numer of events downloaded. Throw warning if 0 events?
 
-'
-Get and clean all data for a study from movebank api
-
-Usage:
-get_study.r <studyid> [--raw=<raw>] [-t] [--auth=<auth>] [--seed=<seed>]
-get_study.r (-h | --help)
-
-Options:
--h --help     Show this screen.
--v --version     Show version.
--r --raw=<raw>  Directory for saving csv files. Defaults to <wd>/data/<studyid>/raw.
--a --auth=<auth>  Authentication method. Can be password, keyring, or path to yml file. Default is keyring.
--s --seed=<seed>  Random seed. Defaults to 5326 if not passed
--t --test         Indicates script is a test run, will not save output parameters or commit to git
-' -> doc
+doc <- "Get and clean all data for a study from movebank api
+        Usage:
+        get_study.r <studyid> [--raw=<raw>] [-t] [--auth=<auth>] [--seed=<seed>]
+        get_study.r (-h | --help)
+        
+        Options:
+        -h --help     Show this screen.
+        -v --version     Show version.
+        -r --raw=<raw>  Directory for saving csv files. Defaults to <wd>/data/<studyid>/raw.
+        -a --auth=<auth>  Authentication method. Can be password, keyring, or path to yml file. Default is keyring.
+        -s --seed=<seed>  Random seed. Defaults to 5326 if not passed
+        -t --test         Indicates script is a test run, will not save output parameters or commit to git"
 
 isAbsolute <- function(path) {
   grepl("^(/|[A-Za-z]:|\\\\|~)", path)
@@ -36,9 +33,9 @@ if(interactive()) {
   .test <- TRUE
   rd <- here
 
-  .studyid <- 170501269
-  .auth <- NULL
-  .rawP <- file.path(.wd,'data/csvs',.studyid,'raw')
+  .studyid <- 481458
+  .auth <- file.path(.wd,'auth.yml')
+  .rawP <- file.path(.wd,'raw_csvs',.studyid,'raw')
   
 } else {
   suppressPackageStartupMessages({
@@ -47,7 +44,7 @@ if(interactive()) {
     library(whereami)
   })
   
-  ag <- docopt(doc, version = '0.1\n')
+  ag <- docopt(doc)
   # .wd <- getwd()
   .wd <- '~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output'
   .script <-  whereami::thisfile()

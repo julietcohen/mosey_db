@@ -5,3 +5,5 @@
 
 *.pdf
 *.html
+logs/*
+load_status.csv
