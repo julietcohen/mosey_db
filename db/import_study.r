@@ -53,7 +53,7 @@ if(interactive()) {
   
   rd <- is_rstudio_project$make_fix_file(.script)
   
-  .studyid <- as.integer(ag$studyid)
+  .studyid <- as.numeric(ag$studyid)
 
   if(length(ag$db)==0) {
     .dbPF <- file.path(.wd,'data','mosey.db')
@@ -111,6 +111,12 @@ loadInsert <- function(entity,fields) {
     pull('type_clean') %>% paste(collapse="")
   
   dat <- read_csv(file.path(.cleanP,glue('{entity}.csv')),col_type=coltypes)
+  
+  if(entity == 'event') {
+    study_df <- read_csv(file.path(.cleanP,'study.csv'))
+    study_id <- study_df$study_id[1]
+    dat$study_id <- study_id
+  }
   
   rows <- dat %>% 
     mutate_if(is.POSIXct,movebankTs) %>%

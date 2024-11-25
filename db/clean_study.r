@@ -49,7 +49,7 @@ if(interactive()) {
   .seed <- ag$seed
   .test <- as.logical(ag$test)
   rd <- is_rstudio_project$make_fix_file(.script)
-  .studyid <- as.integer(ag$studyid)
+  .studyid <- as.numeric(ag$studyid)
     
   source(rd('funs/input_parse.r'))
   
