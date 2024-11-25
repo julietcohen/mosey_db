@@ -3,11 +3,11 @@
 # src=~/projects/movebankdb/src
 
 #wd=~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output
-out=/Users/juliet/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/raw_csvs
-src=/Users/juliet/Documents/OliverLab/covid_paper/repositories/mosey_db
-db=/Users/juliet/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/data/mosey.db
+export out=/Users/juliet/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/raw_csvs
+export src=/Users/juliet/Documents/OliverLab/covid_paper/repositories/mosey_db
+export db=/Users/juliet/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output/data/mosey.db
 
-cd $wd
+# cd $wd
 
 # In order to run the script below, set up a study control file and an authentication file
 # 1) In the control files directory $wd/ctfs, create a file called study.csv with 

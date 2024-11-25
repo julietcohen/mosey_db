@@ -48,7 +48,7 @@ if(interactive()) {
   .eda <- as.logical(ag$eda)
   rd <- is_rstudio_project$make_fix_file(.script)
   
-  .studyid <- as.integer(ag$studyid)
+  .studyid <- as.numeric(ag$studyid)
   
   if(length(ag$db)==0) {
     .dbPF <- file.path(.wd,'data','mosey.db')

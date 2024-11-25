@@ -74,7 +74,10 @@ do
   
   if [[ "$process" = *d* ]]; then
     echo "Downloading study ${studyId}"
-    $MOSEYDB_SRC/db/get_study.r ${studyId} -r $raw -t 2>&1 | tee logs/$studyId.log
+    Rscript $MOSEYDB_SRC/db/get_study.r --studyid=${studyId} -r $raw -t 2>&1 | tee logs/$studyId.log
+    #cmd=$MOSEYDB_SRC/db/get_study.r ${studyId} -r $raw -t
+    #echo "Command: $cmd"
+    #$cmd 2>&1 | tee logs/$studyId.log
     exitcode=("${PIPESTATUS[@]}")
 
     #See here for info on how to store: https://www.mydbaworld.com/retrieve-return-code-all-commands-pipeline-pipestatus/
@@ -141,7 +144,7 @@ do
     params=()
     [[ ! -z "$db" ]] && params+=("-d $db")
     
-    $MOSEYDB_SRC/db/validate_import.r ${studyId} -c $clean "${params[@]}" -t 2>&1 | tee -a logs/$studyId.log
+    Rscript $MOSEYDB_SRC/db/validate_import.r ${studyId} -c $clean "${params[@]}" -t 2>&1 | tee -a logs/$studyId.log
   
     exitcode=("${PIPESTATUS[@]}")
     

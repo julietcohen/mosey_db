@@ -9,7 +9,7 @@
 
 doc <- "Get and clean all data for a study from movebank api
         Usage:
-        get_study.r <studyid> [--raw=<raw>] [-t] [--auth=<auth>] [--seed=<seed>]
+        get_study.r --studyid=<studyid> [--raw=<raw>] [-t] [--auth=<auth>] [--seed=<seed>]
         get_study.r (-h | --help)
         
         Options:
@@ -33,7 +33,7 @@ if(interactive()) {
   .test <- TRUE
   rd <- here
 
-  .studyid <- 481458
+  .studyid <- 3266430241
   .auth <- file.path(.wd,'auth.yml')
   .rawP <- file.path(.wd,'raw_csvs',.studyid,'raw')
   
@@ -42,9 +42,12 @@ if(interactive()) {
     library(docopt)
     library(rprojroot)
     library(whereami)
+    library(glue)
   })
   
   ag <- docopt(doc)
+  #message("Raw command line args:")
+  #print(commandArgs())
   # .wd <- getwd()
   .wd <- '~/Documents/OliverLab/covid_paper/new_spp_db/mosey_db_output'
   .script <-  whereami::thisfile()
@@ -53,7 +56,10 @@ if(interactive()) {
   rd <- is_rstudio_project$make_fix_file(.script)
   
   .auth <- ag$auth
-  .studyid <- as.integer(ag$studyid)
+  .studyid <- as.numeric(ag$studyid)
+  #.studyid <- ag$studyid
+  message(glue("Study ID value: {.studyid}"))
+  message(glue("Class of Study ID value: {class(.studyid)}"))
   
   if(length(ag$raw)==0) {
     .rawP <- file.path(.wd,'data',.studyid,'raw')
