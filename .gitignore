@@ -6,4 +6,5 @@
 *.pdf
 *.html
 logs/*
+*.log
 load_status.csv

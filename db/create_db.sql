@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `individual` (
 	`individual_id`	INTEGER PRIMARY KEY,
 	`local_identifier`	TEXT,
 	`nick_name`	TEXT,
-	`study_id`	INTEGER,
+	`study_id`	REAL,
 	`ring_id`	TEXT,
 	`sex`	TEXT,
   `taxon_id`	INTEGER,

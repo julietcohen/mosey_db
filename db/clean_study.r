@@ -347,7 +347,7 @@ dep %>% mutate(
     na_dep_on=is.na(deploy_on_timestamp),
     na_dep_off=is.na(deploy_off_timestamp)) %>%
   distinct(na_dep_on,na_dep_off) %>%
-  mutate(across(.fns=~ifelse(.,NA,'timestamp'))) %>%
+  mutate(across(.cols = everything(), .fns=~ifelse(.,NA,'timestamp'))) %>%
   arrange(na_dep_on,na_dep_off) %>% 
   kable %>% paste(collapse='\n') %>% message
 
