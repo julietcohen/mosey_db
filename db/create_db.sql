@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
 ) WITHOUT ROWID;
 
 CREATE TABLE IF NOT EXISTS `study` (
-	`study_id`	REAL PRIMARY KEY,
+	`study_id`	INTEGER PRIMARY KEY,
 	`study_name`	TEXT,
 	`principal_investigator_name`	TEXT,
 	`principal_investigator_email`	TEXT,
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `individual` (
 	`individual_id`	INTEGER PRIMARY KEY,
 	`local_identifier`	TEXT,
 	`nick_name`	TEXT,
-	`study_id`	REAL,
+	`study_id`	INTEGER,
 	`ring_id`	TEXT,
 	`sex`	TEXT,
   `taxon_id`	INTEGER,
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `deployment` (
 
 CREATE TABLE IF NOT EXISTS `event` (
 	`event_id`	INTEGER PRIMARY KEY,
-	`study_id` REAL,
+	`study_id` INTEGER,
 	`individual_id`	INTEGER,
 	`lon`	REAL,
 	`lat`	REAL,
